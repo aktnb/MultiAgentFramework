@@ -163,7 +163,12 @@ void Lora::send(byte *data, size_t length, uint16_t pan_id, uint16_t dst_id) {
     frame[9] = index + data_length == length ? '1' : '0';
     memcpy(frame+10, data+index, data_length);
     //  Send
-    Serial.write(frame, frame_length+1);
+    Serial2.write(frame, frame_length+1);
+    String expected = String((char)0x2) + "OK";
+    if (!wait(expected, 1000)) {
+      Serial.println("Unexpected response from Lora");
+      return;
+    }
     Serial.print("\r\n");
     index += 49;
   }
