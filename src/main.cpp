@@ -13,11 +13,14 @@ void setup() {
     Serial.println("setup");
   #endif
 
-  lora.init(0x1111, 0x0001, 5);
+  lora.init(0x1111, 0x0002, 5);
+
+  delay(1000);
 
   String str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
   lora.send((byte*)str.c_str(), str.length(), 0x1111, 0x0002);
 }
 
 void loop() {
+  lora.receive();
 }

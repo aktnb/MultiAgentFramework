@@ -136,6 +136,11 @@ void Lora::init(uint16_t pan_id, uint16_t own_id, int8_t rst_pin) {
     return;
   }
 
+  if (!wait("\r\n", 100)) {
+    Serial.println("Unexpected response from Lora");
+    return;
+  }
+
   Serial.println("End init Lora");
 }
 
@@ -232,8 +237,8 @@ void Lora::receive() {
     byte* payload;
     payload = new byte[length - 13];
     memcpy(payload, buffer+13, length - 13);
-    String key = String((char*) pan_id) + String((char*) snd_id);
-    m_buf[key] += String((char*) payload);
+    String key = String(pan_id, 4) + String(snd_id, 4);
+    m_buf[key] += String(payload, length-13);
     if (buffer[12] == '1') {
       Serial.println(key);
       Serial.println(m_buf[key]);
