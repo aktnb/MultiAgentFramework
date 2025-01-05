@@ -20,12 +20,11 @@ void setup() {
 
   delay(1000);
 
-  JsonDocument doc;
-  doc["type"] = static_cast<int>(MessageType::REQUEST);
-  doc["dst"] = "11110002";
-  doc["data_type"] = "info";
+  Request request;
+  request.dst = "11110002";
+  request.dataType = "info";
   String output;
-  serializeJson(doc, output);
+  serializeMessage(request, output);
 
   lora.send((byte*)output.c_str(), output.length(), 0x1111, 0x0002);
 }
