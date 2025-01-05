@@ -10,7 +10,7 @@ class MyMessageHandler : public MessageHandler {
 public:
   void init(Lora &lora);
   void onRequest(Request &request);
-  void onData(JsonDocument &doc);
+  void onData(Data &data);
   void onReject(JsonDocument &doc);
   void onAccept(JsonDocument &doc);
   void onPropose(JsonDocument &doc);
