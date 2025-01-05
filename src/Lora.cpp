@@ -169,6 +169,10 @@ void Lora::send(byte *data, size_t length, uint16_t pan_id, uint16_t dst_id) {
   }
 }
 
+void Lora::tick() {
+  this->receive();
+}
+
 String Lora::read() {
   String buffer;
   while (1) {

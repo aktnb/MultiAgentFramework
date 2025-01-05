@@ -16,6 +16,8 @@ public:
   void onPropose(JsonDocument &doc);
   void onAnnouncement(JsonDocument &doc);
   void onCancel(JsonDocument &doc);
+
+  void tick();
 };
 
 #endif

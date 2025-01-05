@@ -43,3 +43,7 @@ void MyMessageHandler::onAnnouncement(JsonDocument &doc) {
 void MyMessageHandler::onCancel(JsonDocument &doc) {
   
 }
+
+void MyMessageHandler::tick() {
+
+}
