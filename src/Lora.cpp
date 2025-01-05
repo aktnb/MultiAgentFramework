@@ -1,5 +1,6 @@
 #include <ArduinoJson.h>
 #include "Lora.h"
+#include "MessageHandler.h"
 
 #define _DEBUG
 
@@ -251,6 +252,17 @@ void Lora::handleMessage(String message) {
   JsonDocument doc;
   deserializeJson(doc, message);
 
-  String type = doc["type"];
+  int type = doc["type"];
   Serial.println("Received: " + type);
+  switch(static_cast<MessageType>(type)) {
+    case MessageType::REQUEST:
+      for (int i=0; i < this->m_handlers_.size(); i++) {
+        this->m_handlers_[i]->onRequest(doc);
+      }
+      break;
+  }
+}
+
+void Lora::addHandler(MessageHandler &handler) {
+  m_handlers_.push_back(&handler);
 }
