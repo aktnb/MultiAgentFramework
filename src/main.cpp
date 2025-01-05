@@ -16,9 +16,6 @@ void setup() {
   lora.init(0x1111, 0x0002, 5);
 
   delay(1000);
-
-  String str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-  lora.send((byte*)str.c_str(), str.length(), 0x1111, 0x0002);
 }
 
 void loop() {
