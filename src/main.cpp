@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <ArduinoJson.h>
 #include "Lora.h"
 
 // #define _DEBUG
@@ -17,8 +18,14 @@ void setup() {
 
   delay(1000);
 
-  String str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
-  lora.send((byte*)str.c_str(), str.length(), 0x1111, 0x0002);
+  JsonDocument doc;
+  doc["type"] = "request";
+  doc["dst"] = "11110002";
+  doc["data_type"] = "temperature";
+  String output;
+  serializeJson(doc, output);
+
+  lora.send((byte*)output.c_str(), output.length(), 0x1111, 0x0002);
 }
 
 void loop() {
