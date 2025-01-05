@@ -17,9 +17,9 @@ void MyMessageHandler::onRequest(Request &request) {
   if (request.dataType == "info") {
     Data data;
     int panId;
-    sscanf(request.src.substring(0, 4), "%x", &panId);
+    sscanf(request.src.substring(0, 4).c_str(), "%x", &panId);
     int srcId;
-    sscanf(request.src.substring(4, 8), "%x", &srcId);
+    sscanf(request.src.substring(4, 8).c_str(), "%x", &srcId);
     data.src = request.dst;
     data.dst = request.src;
     data.dataType = "info";
