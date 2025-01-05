@@ -22,6 +22,7 @@ void setup() {
 
   Request request;
   request.dst = "11110002";
+  request.src = "11110001";
   request.dataType = "info";
   String output;
   serializeMessage(request, output);
