@@ -271,6 +271,13 @@ void Lora::handleMessage(String message) {
         this->m_handlers_[i]->onRequest(request);
       }
       break;
+    case MessageType::DATA:
+      Data data;
+      deserializeMessage(doc, data);
+      for (int i=0; i < this->m_handlers_.size(); i++) {
+        this->m_handlers_[i]->onData(data);
+      }
+      break;
   }
 }
 
