@@ -31,5 +31,6 @@ void setup() {
 }
 
 void loop() {
-  lora.receive();
+  lora.tick();
+  handler.tick();
 }

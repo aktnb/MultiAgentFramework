@@ -8,13 +8,11 @@ void MyMessageHandler::init(Lora &lora) {
   this->lora = lora;
 }
 
-void MyMessageHandler::onRequest(JsonDocument &doc) {
+void MyMessageHandler::onRequest(Request &request) {
   Serial.println("Request received");
-  String dst = doc["dst"];
-  String dataType = doc["data_type"];
-  Serial.println(" " + dst);
-  Serial.println(" " + dataType);
-  if (dataType == "info") {
+  Serial.println(" " + request.dst);
+  Serial.println(" " + request.dataType);
+  if (request.dataType == "info") {
     String response = "OK";
     lora.send((byte*)response.c_str(), response.length(), 0x0001, 0x0001);
   }
@@ -42,4 +40,8 @@ void MyMessageHandler::onAnnouncement(JsonDocument &doc) {
 
 void MyMessageHandler::onCancel(JsonDocument &doc) {
   
+}
+
+void MyMessageHandler::tick() {
+
 }

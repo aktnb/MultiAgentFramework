@@ -173,6 +173,10 @@ void Lora::send(byte *data, size_t length, uint16_t pan_id, uint16_t dst_id) {
   }
 }
 
+void Lora::tick() {
+  this->receive();
+}
+
 String Lora::read() {
   String buffer;
   while (1) {
@@ -260,8 +264,10 @@ void Lora::handleMessage(String message) {
   Serial.println("Received: " + type);
   switch(static_cast<MessageType>(type)) {
     case MessageType::REQUEST:
+      Request request;
+      deserializeMessage(doc, request);
       for (int i=0; i < this->m_handlers_.size(); i++) {
-        this->m_handlers_[i]->onRequest(doc);
+        this->m_handlers_[i]->onRequest(request);
       }
       break;
   }
