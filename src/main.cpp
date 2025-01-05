@@ -21,7 +21,7 @@ void setup() {
   delay(1000);
 
   JsonDocument doc;
-  doc["type"] = 0;
+  doc["type"] = static_cast<int>(MessageType::REQUEST);
   doc["dst"] = "11110002";
   doc["data_type"] = "info";
   String output;
