@@ -139,6 +139,29 @@ void Lora::init(uint16_t pan_id, uint16_t own_id, int8_t rst_pin) {
   Serial.println("End init Lora");
 }
 
+void Lora::send(byte *data, size_t length, uint16_t pan_id, uint16_t dst_id) {
+  size_t index = 0;
+  byte frame[1+8+50];
+  char pan_id_buf[4];
+  sprintf(pan_id_buf, "%04X", pan_id);
+  memcpy(frame+1, pan_id_buf, 4);
+  char dst_id_buf[4];
+  sprintf(dst_id_buf, "%04X", dst_id);
+  memcpy(frame+5, dst_id_buf, 4);
+
+  while (index < length) {
+    int8_t data_length = index + 49 < length ? 49 : length - index;
+    int8_t frame_length = 9 + data_length;
+    frame[0] = (byte)(frame_length & 0xff);
+    frame[9] = index + data_length == length ? '1' : '0';
+    memcpy(frame+10, data+index, data_length);
+    //  Send
+    Serial.write(frame, frame_length+1);
+    Serial.print("\r\n");
+    index += 49;
+  }
+}
+
 String Lora::read() {
   String buffer;
   while (1) {
