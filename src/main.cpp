@@ -14,6 +14,9 @@ void setup() {
   #endif
 
   lora.init(0x1111, 0x0001, 5);
+
+  String str = "testtesttesttesttesttesttesttesttesttesttesttesttesttesttest";
+  lora.send((byte*)str.c_str(), str.length(), 0x1111, 0x0002);
 }
 
 void loop() {
