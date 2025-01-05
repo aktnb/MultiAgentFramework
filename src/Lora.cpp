@@ -99,8 +99,8 @@ void Lora::init(uint16_t pan_id, uint16_t own_id, int8_t rst_pin) {
     return;
   }
 
-  // Serial2.write("ack 1\r\n");
-  Serial2.write("ack 2\r\n");
+  Serial2.write("ack 1\r\n");
+  // Serial2.write("ack 2\r\n");
   if (!wait("OK\r\n", 100)) {
     Serial.println("Unexpected response from Lora");
     return;
