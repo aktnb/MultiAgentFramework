@@ -2,7 +2,7 @@
 
 void serializeMessage(Request &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "request";
+  doc["type"] = static_cast<int>(MessageType::REQUEST);
   doc["id"] = message.id;
   doc["dst"] = message.dst;
   doc["src"] = message.src;
@@ -17,7 +17,7 @@ void deserializeMessage(JsonDocument &doc, Request &message) {
 }
 void serializeMessage(Data &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "data";
+  doc["type"] = static_cast<int>(MessageType::DATA);
   doc["dst"] = message.dst;
   doc["src"] = message.src;
   doc["data_type"] = message.dataType;
@@ -34,7 +34,7 @@ void deserializeMessage(JsonDocument &doc, Data &message) {
 }
 void serializeMessage(Reject &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "reject";
+  doc["type"] = static_cast<int>(MessageType::REQUEST);
   doc["dst"] = message.dst;
   doc["src"] = message.src;
   doc["contract_id"] = message.contractId;
@@ -47,7 +47,7 @@ void deserializeMessage(JsonDocument &doc, Reject &message) {
 }
 void serializeMessage(Accept &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "accept";
+  doc["type"] = static_cast<int>(MessageType::ACCEPT);
   doc["dst"] = message.dst;
   doc["src"] = message.src;
   doc["contract_id"] = message.contractId;
@@ -60,7 +60,7 @@ void deserializeMessage(JsonDocument &doc, Accept &message) {
 }
 void serializeMessage(Announce &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "announce";
+  doc["type"] = static_cast<int>(MessageType::ANNOUNCEMENT);
   doc["dst"] = message.dst;
   doc["src"] = message.src;
   doc["contract_id"] = message.contractId;
@@ -77,7 +77,7 @@ void deserializeMessage(JsonDocument &doc, Announce &message) {
 }
 void serializeMessage(Propose &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "propose";
+  doc["type"] = static_cast<int>(MessageType::PROPOSE);
   doc["dst"] = message.dst;
   doc["src"] = message.src;
   doc["contract_id"] = message.contractId;
@@ -94,7 +94,8 @@ void deserializeMessage(JsonDocument &doc, Propose &message) {
 }
 void serializeMessage(Cancel &message, String &json) {
   JsonDocument doc;
-  doc["type"] = "cancel";
+  doc["type"] = static_cast<int>(MessageType::CANCEL);
+  doc["dst"] = message.dst;
   doc["dst"] = message.dst;
   doc["src"] = message.src;
   doc["contract_id"] = message.contractId;
