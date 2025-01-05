@@ -260,8 +260,10 @@ void Lora::handleMessage(String message) {
   Serial.println("Received: " + type);
   switch(static_cast<MessageType>(type)) {
     case MessageType::REQUEST:
+      Request request;
+      deserializeMessage(doc, request);
       for (int i=0; i < this->m_handlers_.size(); i++) {
-        this->m_handlers_[i]->onRequest(doc);
+        this->m_handlers_[i]->onRequest(request);
       }
       break;
   }

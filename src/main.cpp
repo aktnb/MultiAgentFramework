@@ -17,8 +17,6 @@ void setup() {
 
   lora.init(0x1111, 0x0002, 5);
   lora.addHandler(handler);
-
-  delay(1000);
 }
 
 void loop() {
