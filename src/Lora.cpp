@@ -218,7 +218,8 @@ void Lora::receive() {
   while (Serial2.available()) {
     byte c = Serial2.read();
     int length = int(c);
-    byte* buffer = new byte[length];
+    byte* buffer;
+    buffer = new byte[length];
     for (int i = 0; i < length; i++) {
       buffer[i] = Serial2.read();
     }
@@ -228,13 +229,12 @@ void Lora::receive() {
     memcpy(pan_id, buffer+4, 4);
     byte snd_id[4];
     memcpy(snd_id, buffer+8, 4);
-    byte is_last_buf;
-    memcpy(is_last_buf, buffer+12);
-    byte payload = new byte[length - 13];
+    byte* payload;
+    payload = new byte[length - 13];
     memcpy(payload, buffer+13, length - 13);
-    String key = String(pan_id) + String(snd_id);
-    m_buf[key] += String(payload);
-    if (is_last_buf == '1') {
+    String key = String((char*) pan_id) + String((char*) snd_id);
+    m_buf[key] += String((char*) payload);
+    if (buffer[12] == '1') {
       Serial.println(key);
       Serial.println(m_buf[key]);
       m_buf[key] = "";
