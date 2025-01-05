@@ -19,9 +19,9 @@ void setup() {
   delay(1000);
 
   JsonDocument doc;
-  doc["type"] = "request";
+  doc["type"] = 0;
   doc["dst"] = "11110002";
-  doc["data_type"] = "temperature";
+  doc["data_type"] = "info";
   String output;
   serializeJson(doc, output);
 
