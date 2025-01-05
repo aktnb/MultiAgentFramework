@@ -81,7 +81,7 @@ void deserializeMessage(JsonDocument &doc, Cancel &message);
 class MessageHandler {
 public:
   virtual void onRequest(Request &request) = 0;
-  virtual void onData(JsonDocument &doc) = 0;
+  virtual void onData(Data &data) = 0;
   virtual void onReject(JsonDocument &doc) = 0;
   virtual void onAccept(JsonDocument &doc) = 0;
   virtual void onPropose(JsonDocument &doc) = 0;
