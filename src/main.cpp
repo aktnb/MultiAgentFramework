@@ -14,7 +14,7 @@ void setup() {
     Serial.println("setup");
   #endif
 
-  lora.init(0x1111, 0x0002, 5);
+  lora.init(0x1111, 0x0001, 5);
 
   delay(1000);
 
