@@ -169,7 +169,6 @@ void Lora::send(byte *data, size_t length, uint16_t pan_id, uint16_t dst_id) {
       Serial.println("Unexpected response from Lora");
       return;
     }
-    Serial.print("\r\n");
     index += 49;
   }
 }
